@@ -1,11 +1,13 @@
-package com.taohansen.microrabbit.services;
+package com.gestaocerta.microaudit.services;
 
-import com.taohansen.microrabbit.config.RabbitMQConfig;
-import com.taohansen.microrabbit.entities.LogMessage;
-import com.taohansen.microrabbit.repositories.LogMessageRepository;
+import com.gestaocerta.microaudit.config.RabbitMQConfig;
+import com.gestaocerta.microaudit.entities.LogMessage;
+import com.gestaocerta.microaudit.repositories.LogMessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +32,13 @@ public class LogConsumer {
         log.setType("AUDIT");
         log.setOrigin("...");
         logMessageRepository.save(log);
+    }
+
+    public List<LogMessage> getAllAuditMessages() {
+        return logMessageRepository.findAllByType("AUDIT");
+    }
+
+    public List<LogMessage> getAllLogMessages() {
+        return logMessageRepository.findAllByType("LOG");
     }
 }

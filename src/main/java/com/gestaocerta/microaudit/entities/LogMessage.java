@@ -1,4 +1,4 @@
-package com.taohansen.microrabbit.entities;
+package com.gestaocerta.microaudit.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

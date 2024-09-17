@@ -1,4 +1,4 @@
-package com.taohansen.microrabbit;
+package com.gestaocerta.microaudit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

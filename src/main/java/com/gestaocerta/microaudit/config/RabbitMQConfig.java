@@ -1,4 +1,4 @@
-package com.taohansen.microrabbit.config;
+package com.gestaocerta.microaudit.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

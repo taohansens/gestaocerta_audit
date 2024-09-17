@@ -1,0 +1,43 @@
+services:
+  micro-audit:
+    build: .
+    image: taohans/gestaocerta:micro-audit
+    container_name: micro-audit
+    depends_on:
+      - postgres-db-consumer
+    environment:
+      - APP_PROFILE=dev
+      - SERVER_PORT=8085
+      - DB_HOST=postgres-db-consumer
+      - DB_PORT=5432
+      - DB_NAME=microservice_db
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - GATEWAY_URL=http://localhost:8080/audit/
+      - RABBITMQ_HOST=rabbitmq-server
+      - RABBITMQ_USER=rabbitmq
+      - RABBITMQ_PASS=rabbitmq
+    networks:
+      - gestaocerta-private
+      - int-consumer-net
+
+  postgres-db-consumer:
+    image: postgres:15
+    container_name: postgres-db-consumer
+    environment:
+      POSTGRES_DB: microservice_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - int-consumer-net
+    volumes:
+      - postgres_data_consumer:/var/lib/postgresql/data
+
+networks:
+  gestaocerta-private:
+    external: true
+  int-consumer-net:
+
+volumes:
+  postgres_data_consumer:
+    driver: local
